@@ -16,6 +16,14 @@ async def get_tasks():
     return tasks
 
 
+# @router.get('/', response_model=Task)
+# async def get_tasks_id(task_id: int):
+#     with SessionLocal() as session:
+#         session.expire_on_commit = False
+#         tasks = utils.get_task_by_id(session, task_id)
+#     return tasks
+
+
 @router.post('/', response_model=Task)
 async def create_tasks(task: Annotated[TaskBase, Depends()]):
     with SessionLocal() as session:

@@ -1,4 +1,4 @@
-from typing import List, Type
+from typing import Type
 
 from sqlalchemy.orm import Session
 
@@ -10,7 +10,7 @@ def get_all_task(db: Session) -> list[Type[Task]]:
     return db.query(Task).all()
 
 
-def get_task_by_id(db: Session, task_id: int) -> Task:
+def get_task_by_id(db: Session, task_id: int) -> Type[Task] | None:
     return db.query(Task).filter(Task.id == task_id).first()
 
 
