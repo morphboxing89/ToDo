@@ -1,6 +1,8 @@
 from typing import Annotated
 
 from fastapi import APIRouter, Depends
+
+from src.auth.utils import oauth2_scheme
 from src.database import SessionLocal
 
 import src.utils as utils
@@ -33,7 +35,7 @@ async def create_tasks(task: Annotated[TaskBase, Depends()]):
 
 
 @router.put('/{task_id}', response_model=Task)
-async def update_task(task_id: int, task: Annotated[TaskBase, Depends()]):
+async def update_task(task_id: int, task: Annotated[TaskBase, Depends(oauth2_scheme)]):
     with SessionLocal() as session:
         session.expire_on_commit = False
         task = utils.update_task(session, task, task_id)

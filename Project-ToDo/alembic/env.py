@@ -8,6 +8,7 @@ from alembic import context
 import config as app_config
 from src.database import Base
 from src.models import *
+from src.auth.models import *
 
 
 # this is the Alembic Config object, which provides
