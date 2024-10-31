@@ -25,7 +25,7 @@ def create_task(db: Session, task: schemas.TaskBase) -> Task:
     return task
 
 
-def update_task(db: Session, new_task: Task, task_id: int) -> Type[Task] | None:
+def update_task(db: Session, new_task: Task, task_id: int) -> Task:
     task = db.query(Task).filter(Task.id == task_id).first()
 
     task.title = new_task.title

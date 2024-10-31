@@ -35,7 +35,7 @@ async def create_tasks(task: Annotated[TaskBase, Depends()]):
 
 
 @router.put('/{task_id}', response_model=Task)
-async def update_task(task_id: int, task: Annotated[TaskBase, Depends(oauth2_scheme)]):
+async def update_task(task_id: int, task: Task, token=Depends(oauth2_scheme)):
     with SessionLocal() as session:
         session.expire_on_commit = False
         task = utils.update_task(session, task, task_id)
